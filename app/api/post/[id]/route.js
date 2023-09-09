@@ -2,6 +2,7 @@
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
+
 export const GET = async (request, { params }) => {
   try {
     const { id } = params;
@@ -21,7 +22,6 @@ export const GET = async (request, { params }) => {
         }
       );
     }
-
     return NextResponse.json(GetPost);
   } catch (err) {
     console.error("Error Getting post of desired id", err);
@@ -31,7 +31,7 @@ export const GET = async (request, { params }) => {
         error: err.message,
       },
       {
-        status: 500, // Return a 500 status code for server error
+        status: 500,
       }
     );
   }
@@ -71,3 +71,49 @@ export const PATCH = async (request, {params}) => {
     }
 }
 
+
+
+export const DELETE = async (request, { params }) => {
+    try {
+      const { id } = params;
+      const existingPost = await prisma.post.findUnique({
+        where: {
+          id,
+        },
+      });
+  
+      if (!existingPost) {
+        return NextResponse.json(
+          {
+            message: "Post not found. Delete operation aborted.",
+          },
+          {
+            status: 404,
+          }
+        );
+      }
+  
+      await prisma.post.delete({
+        where: {
+          id,
+        },
+      });
+  
+      return NextResponse.json({
+        message: "Delete operation has been successful.",
+      });
+    } catch (err) {
+      console.error("Error deleting post", err);
+  
+      return NextResponse.json(
+        {
+          message: "Error deleting post",
+          error: err.message,
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+  };
+  

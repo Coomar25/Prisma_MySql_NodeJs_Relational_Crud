@@ -1,5 +1,4 @@
 // url: http://localhost:3000/api/posts
-
 import prisma from "@/app/libs/prismadb"
 import { NextResponse } from "next/server"
 
@@ -32,15 +31,6 @@ export const GET = async () => {
     }
 }
 
-
-// export const GET = async () => {
-//     try{
-//         const GetPost = await prisma.post.findOne({_id:1});
-//         return NextResponse.json(GetPost)
-//     }catch(err){
-//         return NextResponse.json({message: "Error inserting post", err}, { status: 500 })
-//     }
-// }
 
 
 

@@ -25,6 +25,10 @@ const Navbar = () => {
     {
       label: 'Post FetchAPI',
       href: '/posts'
+    },
+    {
+      label: 'Crud Operation',
+      href: '/crud'
     }
   ]
 
