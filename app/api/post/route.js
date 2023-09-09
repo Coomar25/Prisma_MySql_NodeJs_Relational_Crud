@@ -1,4 +1,4 @@
-// url: http://localhost:3000/api/posts
+// url: http://localhost:3000/api/post
 import prisma from "@/app/libs/prismadb"
 import { NextResponse } from "next/server"
 

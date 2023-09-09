@@ -2,11 +2,12 @@
 import { useState } from "react"
 import AddPostModel from "./AddPostModel"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
 
 const AddPost = () => {
   const [modelOpen, setModelOpen] = useState(false);
-
+  const router = useRouter();
   // Form state
   const[title, setTitle] = useState("");
   const[description, setDescription] = useState("");
@@ -20,12 +21,14 @@ const AddPost = () => {
         title,
         description,
       });
-      console.log(response.data);
+      // console.log(response.data);
     }catch(error){
       console.error('Error creating post', error);
     }
     setTitle('');
     setDescription('');
+    setModelOpen(false);
+    router.refresh();
   }
 
 
@@ -35,7 +38,6 @@ const AddPost = () => {
         <button onClick={()=>setModelOpen(true)} className="bg-blue-600 text-white p-3 cursor-pointer rounded-sm">Add Post</button>
 
         <AddPostModel modelOpen={modelOpen} setmodelOpen={setModelOpen} >
-
               <form action="" onSubmit={handleSubmit}>
                 <h1 className="text-2xl pb-3">Add New Post</h1>
                 <input type="text" placeholder="Title"  value={title} onChange={(e) => setTitle(e.target.value)} name="title" className="w-full p-2" />
