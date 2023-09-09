@@ -33,7 +33,6 @@ export const GET = async () => {
 }
 
 
-
 // export const GET = async () => {
 //     try{
 //         const GetPost = await prisma.post.findOne({_id:1});
