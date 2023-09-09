@@ -14,7 +14,9 @@ export const POST = async (request) => {
             }
         });
 
-        return NextResponse.json(newPost)
+        return NextResponse.json({
+            message : "Post has been successfully added"
+        })
 
     }catch(err){
         return NextResponse.json({message: "Error inserting post", err}, { status: 500 })
