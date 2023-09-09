@@ -15,12 +15,29 @@ async function getPostDataFromAPI(){
 
 
 const Post = async () => {
-    const post = await getPostDataFromAPI();
-    // const [post, users ] = await Promise.all([getPostDataFromAPI, getUsersDataFromAPI ])
+    // const post = await getPostDataFromAPI();
+    const [post, users ] = await Promise.all([getPostDataFromAPI(), getUsersDataFromAPI() ])
   return (
     <div>
-        <Link className=' rounded-full '>Users Data</Link>
-        <h1 > Post Name </h1>
+        <Link href='posts/user' className=' rounded-full bg-blue-600 p-4 text-black'>Users Data only</Link>
+        <h1 className='p-4 my-4 bg-red-600 text-center text-2xl'> user data</h1>
+        <ul className='gap-4 flex-col'>
+            {
+                users.map(user=> {
+                    return(
+                        <li className='bg-grey-600 p-5 cursor-pointer t' key={user.id}>
+                            <h1>Id:- {user.id}</h1>
+                            <h2>Name:-{user.name}</h2>
+                            <p>{user.username}</p>
+                            <p>{user.email}</p>
+                            <p>{user.address.street}</p>
+                            <p>{user.address.geo.lat}</p>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+        <h1 className='p-4 my-4 bg-red-600 text-center text-2xl'> Post Name </h1>
         <ul className='gap-4 flex-col'>
             {
                 post.map(post=> {
